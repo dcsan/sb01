@@ -5,12 +5,8 @@ const JediContext = React.createContext();
 class JediProvider extends Component {
   state = {
     name: "Vader",
-    side: "dark",
+    good: false,
     counter: 1
-  };
-  addBorg = () => {
-    console.log("addBorg");
-    this.counter = this.counter + 1;
   };
   render() {
     return (
@@ -19,8 +15,15 @@ class JediProvider extends Component {
           state: this.state,
           turnGood: () =>
             this.setState({
-              side: "good"
+              good: !(this.state.good)
+            }),
+          addBorg: () => {
+            let counter = this.state.counter + 1
+            this.setState({
+              counter: counter
             })
+            console.log("addBorg", this.state.counter)
+          }
         }}
       >
         {this.props.children}
@@ -52,8 +55,10 @@ const Borg = props => {
     <JediContext.Consumer>
       {context => (
         <div>
+          <React.Fragment>
           <div>Borg counter: {context.state.counter}</div>
           <button onClick={context.addBorg}>add borg</button>
+          </React.Fragment>
         </div>
       )}
     </JediContext.Consumer>
@@ -66,7 +71,7 @@ const KyloRen = props => {
       {context => (
         <React.Fragment>
           <p>My grandfather is {context.state.name} </p>
-          <p>He belonged to the {context.state.side} side</p>
+          <p>He belonged to the {context.state.good ? 'good' : 'dark'} side</p>
           <button onClick={context.turnGood}>Turn</button>
         </React.Fragment>
       )}

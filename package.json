@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "homepage": "https://codesandbox.io/s/new",
+  "xhomepage": "https://codesandbox.io/s/new",
+  "homepage": "https://localhost/",
   "main": "src/index.js",
   "dependencies": {
     "react": "16.3.0-alpha.2",
